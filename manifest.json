@@ -11,9 +11,9 @@
                 "version": "1.0.0.0",
                 "changelog": "Version initiale",
                 "targetAbi": "10.8.0.0",
-                "sourceUrl": "https://github.com/okn1ce/TheVDJPlugin/releases/download/1.0.0/VDJPlugin.dll",
+                "sourceUrl": "https://github.com/okn1ce/TheVDJPlugin/releases/download/1.0.0/VDJPlugin.zip",
                 "timestamp": "2024-03-21 00:00:00",
-                "checksum": "1A0F0BCB8B9C4DF5CB9D8761435887A8B3F1D7789356ED81493FB8ED4FD13CF3"
+                "checksum": "C5D45C511935937CFFE5732B1E97D0F4F28DD682311F898C23616C9DE5FF6165"
             }
         ]
     }
