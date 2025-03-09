@@ -1,0 +1,20 @@
+[
+    {
+        "category": "General",
+        "guid": "b0daa5f4-2c6a-4c9e-a9c5-e0d67a1c3e93",
+        "name": "VDJ Plugin",
+        "description": "Intégration de Jellyseer pour les requêtes de médias",
+        "owner": "okn1ce",
+        "overview": "Permet aux utilisateurs de faire des requêtes de médias via Jellyseer",
+        "versions": [
+            {
+                "version": "1.0.0.0",
+                "changelog": "Version initiale",
+                "targetAbi": "10.8.0.0",
+                "sourceUrl": "https://github.com/okn1ce/TheVDJPlugin/releases/download/1.0.0/VDJPlugin.dll",
+                "timestamp": "2024-03-21 00:00:00",
+                "checksum": "1A0F0BCB8B9C4DF5CB9D8761435887A8B3F1D7789356ED81493FB8ED4FD13CF3"
+            }
+        ]
+    }
+] 

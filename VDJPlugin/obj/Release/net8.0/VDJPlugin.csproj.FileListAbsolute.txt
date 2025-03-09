@@ -1,0 +1,12 @@
+C:\Users\Ismail\Documents\VDJPlugin\VDJPlugin\obj\Release\net8.0\VDJPlugin.csproj.AssemblyReference.cache
+C:\Users\Ismail\Documents\VDJPlugin\VDJPlugin\obj\Release\net8.0\VDJPlugin.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ismail\Documents\VDJPlugin\VDJPlugin\obj\Release\net8.0\VDJPlugin.AssemblyInfoInputs.cache
+C:\Users\Ismail\Documents\VDJPlugin\VDJPlugin\obj\Release\net8.0\VDJPlugin.AssemblyInfo.cs
+C:\Users\Ismail\Documents\VDJPlugin\VDJPlugin\obj\Release\net8.0\VDJPlugin.csproj.CoreCompileInputs.cache
+C:\Users\Ismail\Documents\VDJPlugin\VDJPlugin\bin\Release\net8.0\VDJPlugin.deps.json
+C:\Users\Ismail\Documents\VDJPlugin\VDJPlugin\bin\Release\net8.0\VDJPlugin.dll
+C:\Users\Ismail\Documents\VDJPlugin\VDJPlugin\bin\Release\net8.0\VDJPlugin.pdb
+C:\Users\Ismail\Documents\VDJPlugin\VDJPlugin\obj\Release\net8.0\VDJPlugin.dll
+C:\Users\Ismail\Documents\VDJPlugin\VDJPlugin\obj\Release\net8.0\refint\VDJPlugin.dll
+C:\Users\Ismail\Documents\VDJPlugin\VDJPlugin\obj\Release\net8.0\VDJPlugin.pdb
+C:\Users\Ismail\Documents\VDJPlugin\VDJPlugin\obj\Release\net8.0\ref\VDJPlugin.dll

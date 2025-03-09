@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Requêtes de médias</title>
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            width: 70%;
+            max-width: 500px;
+        }
+
+        .search-result {
+            display: flex;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .search-result img {
+            width: 100px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="requestPageContainer">
+        <h2>Rechercher un média</h2>
+        
+        <div class="searchContainer">
+            <input type="text" id="searchInput" placeholder="Rechercher un film ou une série...">
+            <button id="searchButton">Rechercher</button>
+        </div>
+
+        <div id="searchResults"></div>
+
+        <div id="requestModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h3>Faire une requête</h3>
+                
+                <select id="qualityProfile">
+                    <option value="">Sélectionner un profil de qualité</option>
+                </select>
+
+                <select id="rootFolder">
+                    <option value="">Sélectionner un dossier</option>
+                </select>
+
+                <button id="submitRequest">Envoyer la requête</button>
+                <button id="cancelRequest">Annuler</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const apiBaseUrl = ApiClient.getConfigurationAsync('JellyseerApiUrl');
+        const apiKey = ApiClient.getConfigurationAsync('JellyseerApiKey');
+        let selectedMedia = null;
+
+        document.getElementById('searchButton').addEventListener('click', async () => {
+            const query = document.getElementById('searchInput').value;
+            const results = await searchMedia(query);
+            displayResults(results);
+        });
+
+        document.getElementById('cancelRequest').addEventListener('click', () => {
+            document.getElementById('requestModal').style.display = 'none';
+        });
+
+        document.getElementById('submitRequest').addEventListener('click', async () => {
+            if (!selectedMedia) return;
+
+            const profileId = document.getElementById('qualityProfile').value;
+            const rootFolderId = document.getElementById('rootFolder').value;
+
+            await requestMedia(
+                selectedMedia.tmdbId,
+                selectedMedia.mediaType,
+                parseInt(profileId),
+                parseInt(rootFolderId)
+            );
+
+            document.getElementById('requestModal').style.display = 'none';
+            alert('Requête envoyée avec succès!');
+        });
+
+        async function searchMedia(query) {
+            const response = await fetch(`${apiBaseUrl}/search?query=${encodeURIComponent(query)}`, {
+                headers: { 'X-Api-Key': apiKey }
+            });
+            return await response.json();
+        }
+
+        async function loadProfiles() {
+            const response = await fetch(`${apiBaseUrl}/profile`, {
+                headers: { 'X-Api-Key': apiKey }
+            });
+            const profiles = await response.json();
+            
+            const select = document.getElementById('qualityProfile');
+            profiles.forEach(profile => {
+                const option = document.createElement('option');
+                option.value = profile.id;
+                option.textContent = profile.name;
+                select.appendChild(option);
+            });
+        }
+
+        async function loadRootFolders() {
+            const response = await fetch(`${apiBaseUrl}/rootfolder`, {
+                headers: { 'X-Api-Key': apiKey }
+            });
+            const folders = await response.json();
+            
+            const select = document.getElementById('rootFolder');
+            folders.forEach(folder => {
+                const option = document.createElement('option');
+                option.value = folder.id;
+                option.textContent = folder.path;
+                select.appendChild(option);
+            });
+        }
+
+        function displayResults(results) {
+            const container = document.getElementById('searchResults');
+            container.innerHTML = '';
+
+            results.forEach(media => {
+                const div = document.createElement('div');
+                div.className = 'search-result';
+                div.innerHTML = `
+                    <img src="https://image.tmdb.org/t/p/w200${media.posterPath}" alt="${media.title}">
+                    <div>
+                        <h3>${media.title}</h3>
+                        <p>${media.overview}</p>
+                        <button onclick="showRequestModal(${JSON.stringify(media)})">Requête</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function showRequestModal(media) {
+            selectedMedia = media;
+            document.getElementById('requestModal').style.display = 'block';
+        }
+
+        async function requestMedia(tmdbId, mediaType, profileId, rootFolderId) {
+            await fetch(`${apiBaseUrl}/request`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Api-Key': apiKey
+                },
+                body: JSON.stringify({
+                    tmdbId,
+                    mediaType,
+                    profileId,
+                    rootFolderId
+                })
+            });
+        }
+
+        // Charger les profils et dossiers au chargement de la page
+        loadProfiles();
+        loadRootFolders();
+    </script>
+</body>
+</html> 
